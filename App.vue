@@ -14,6 +14,7 @@
 
 <style>
 	/*每个页面公共css */
+	/* 添加iconfont文字 */
 	@font-face {
 		font-family: 'iconfont';
 		/* project id 1512466 */
