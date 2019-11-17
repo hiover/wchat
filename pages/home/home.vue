@@ -18,8 +18,7 @@
 		</view>
 		<!-- <input :style="{display:showcommit?'block':'none'}" class="input" confirm-type="发送"  placeholder=" " :focus="showcommit" placeholder="" @blur="showcommit=false" /> -->
 		<view class="commit" :style="{display:showcommit?'flex':'none'}">
-			<input :style="{display:showcommit?'block':'none'}" class="input" confirm-type="发送" 
-			:placeholder="` `" :focus="showcommit"
+			<input :style="{display:showcommit?'block':'none'}" class="input" confirm-type="发送" :placeholder="` `" :focus="showcommit"
 			 placeholder="" @blur="showcommit=false" />
 			<text class="icon face">&#xe71c;</text>
 		</view>
@@ -383,8 +382,8 @@
 		background-color: $header;
 		align-items: center;
 		z-index: 2;
-		position: absolute;
-		bottom:22upx;
+		position: fixed;
+		bottom: 46upx;
 		left: 0;
 		width: 100%;
 		padding: 10upx 13upx;

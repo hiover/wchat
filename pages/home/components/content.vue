@@ -1,5 +1,8 @@
 <template>
 	<view class="list">
+		<view :style="{display:showcommit?'flex':'none'}" class="mask" @tap.stop.prevent="showcommit=false">
+
+		</view>
 		<!-- 头像 -->
 		<image class="avatar" :src="useravatar" mode="scaleToFill" @tap="handleGoUser"></image>
 		<view class="contain">
@@ -43,8 +46,18 @@
 				<view class="time">
 					1分钟前
 				</view>
+				<view class="pop" :style="{display:showcommit?'flex':'none',width:'auto'}">
 
-				<view class="more">
+					<view class="pop-thumb">
+						<text class="icon">&#xe8ab;</text>喜欢
+					</view>
+					<view class="pop-comment">
+						<text class="icon">&#xe8bd;</text>评论
+					</view>
+				</view>
+
+				<view class="more" @tap="showcommit=true">
+
 					<view class="point">
 
 					</view>
@@ -53,6 +66,7 @@
 
 					</view>
 				</view>
+
 
 			</view>
 			<!-- 评论 -->
@@ -95,7 +109,7 @@
 		},
 		data() {
 			return {
-
+				showcommit: false
 			}
 		},
 		methods: {
@@ -159,6 +173,14 @@
 		background: #FFFFFF;
 	}
 
+	.mask {
+		z-index: 1;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		opacity: 0.1;
+	}
+
 	.list {
 		position: relative;
 		display: flex;
@@ -203,6 +225,36 @@
 				justify-content: space-between;
 				align-items: center;
 				margin: 10upx 0;
+				position: relative;
+
+				.pop {
+					display: flex;
+					position: absolute;
+					right: 70upx;
+					background-color: $mask;
+					border-radius: 10upx;
+					padding: 10upx 20upx;
+					color: $white;
+					transition: all .8s ease;
+					display: none;
+					width: 0;
+
+
+					.pop-thumb {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						padding: 0 20upx;
+					}
+
+					.pop-comment {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						padding: 0 20upx;
+					}
+
+				}
 
 				.time {
 					color: $tips;
