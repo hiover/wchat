@@ -1,7 +1,6 @@
 <template>
 	<view class="wapper">
 		<view class="user">
-
 			<!-- 头像 -->
 			<!-- scaleToFill aspectFit -->
 			<image :src="user.avatarUrl" mode="scaleToFill" />
@@ -104,8 +103,13 @@
 </script>
 
 <style lang="scss">
+	
+
 	page {
 		background-color: $header;
+	}
+	text {
+		font-size: 30upx;
 	}
 
 	.hover {

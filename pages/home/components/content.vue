@@ -1,8 +1,8 @@
 <template>
 	<view class="list">
-		<view :style="{display:showcommit?'flex':'none'}" class="mask" @tap.stop.prevent="showcommit=false">
+		<!-- <view :style="{display:showcommit?'flex':'none'}" class="mask" @tap.stop.prevent="showcommit=false">
 
-		</view>
+		</view> -->
 		<!-- 头像 -->
 		<image class="avatar" :lazy-load="true" :src="useravatar" mode="scaleToFill" @tap="handleGoUser" @error="imageError"></image>
 		<view class="contain">
@@ -16,7 +16,7 @@
 			<view v-if="monents.type" class="monents">
 				<view v-if="monents.type==='share'" @tap="handleGoShare(monents.list[0])" class="mon share">
 					<image style="height:50px;width:50px ;" :lazy-load="true" :src="monents.list[0].url" mode="scaleToFill" @error="imageError"></image>
-					<text style="margin: 0 0 0 10px;">{{monents.list[0].copywriting}}</text>
+					<text class="share-copywriting" style="margin: 0 0 0 10px;">{{monents.list[0].copywriting}}</text>
 				</view>
 				<view v-if="monents.type==='vedio'" class="mon vedio">
 					<video id="myVideo" :src="monents.list[0].url" @error="videoErrorCallback" :muted="true" :loop="true" :autoplay="true"
@@ -46,7 +46,7 @@
 				<view class="time">
 					1分钟前
 				</view>
-				<view class="pop" :style="{display:showcommit?'flex':'none',width:'auto'}">
+				<!-- <view class="pop" :style="{display:showcommit?'flex':'none',width:'auto'}">
 
 					<view class="pop-thumb">
 						<text class="icon">&#xe8ab;</text>喜欢
@@ -54,7 +54,7 @@
 					<view class="pop-comment">
 						<text class="icon">&#xe8bd;</text>评论
 					</view>
-				</view>
+				</view> -->
 
 				<view class="more" @tap="showcommit=true">
 
@@ -117,7 +117,7 @@
 				showcommit: false
 			}
 		},
-		
+
 		mixins: [minix],
 		methods: {
 			handlePreviewImg(item, list) {
@@ -184,6 +184,10 @@
 <style lang="scss">
 	page {
 		background: #FFFFFF;
+	}
+
+	text {
+		font-size: 30upx;
 	}
 
 	.mask {
@@ -335,6 +339,9 @@
 					padding: 10upx;
 					margin: 10upx 0;
 
+					.share-copywriting {
+						font-size: 30upx;
+					}
 				}
 			}
 

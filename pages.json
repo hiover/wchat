@@ -1,6 +1,5 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-
 		{
 			"path": "pages/home/home",
 			"style": {
@@ -14,6 +13,19 @@
 				"mp-weixin": {}
 			}
 		},
+		{
+			"path": "pages/home/music/search",
+			"style": {}
+		},
+		{
+			"path": "pages/home/music/music",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle": "white",
+				"navigationStyle": "custom"
+			}
+		},
+		
 		{
 			"path": "pages/home/components/user",
 			"style": {
@@ -57,11 +69,8 @@
 			"path": "pages/home/components/user-setting",
 			"style": {}
 		}
-	    ,{
-            "path" : "pages/home/music/music",
-            "style" : {}
-        }
-    ],
+
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "温城说",
@@ -78,8 +87,8 @@
 	"condition": { //模式配置，仅开发期间生效
 		"current": 1, //当前激活的模式(list 的索引项)
 		"list": [{
-			"name": "", //模式名称
-			"path": "", //启动页面，必选
+			"name": "user", //模式名称
+			"path": "pages/home/components/user", //启动页面，必选
 			"query": "" //启动参数，在页面的onLoad函数里面得到
 		}]
 	}

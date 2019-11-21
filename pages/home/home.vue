@@ -5,7 +5,9 @@
 			<text class="title">温成说</text>
 		</view>
 		<view class="header">
-			<image class="img" :lazy-load="true" :src="header_image" mode="scaleToFill" @tap="handleChangeCaver" />
+			<view class="img-box">
+				<image class="img" :lazy-load="true" :src="header_image" mode="scaleToFill" @tap="handleChangeCaver" />
+			</view>
 			<text class="nickname">{{user.userInfo&&user.userInfo.nickName}}</text>
 			<image class="avatar" :lazy-load="true" :src="user.userInfo&&user.userInfo.avatarUrl" mode=""></image>
 			<text class="icon refrash" :style="[refrash_styles]">&#xe8b4;</text>
@@ -71,7 +73,7 @@
 							list: [{
 								id: '',
 								url: this.ganImage(),
-								copywriting: '明年猪肉接着涨价，大家全部呆在家'
+								copywriting: '美国通过香港人权法案！！！'
 							}]
 						}
 					},
@@ -364,10 +366,23 @@
 			transform: rotate(0deg);
 		}
 
-		.img {
+		.img-box {
 			height: 100%;
 			width: 100%;
 			background-color: $mask;
+			position: relative;
+
+			.img {
+				position: absolute;
+				bottom: 0upx;
+				left: 0upx;
+				width: 100%;
+
+			}
+
+			// position: absolute;
+			// bottom: -300upx;
+			// left: 0;
 		}
 
 		.nickname {
@@ -421,6 +436,7 @@
 
 
 	.con {
+		// margin-top: 38%;
 		display: flex;
 		flex-direction: column;
 		margin: 12% 0 0 0;
