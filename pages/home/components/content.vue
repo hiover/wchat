@@ -1,7 +1,6 @@
 <template>
 	<view class="list">
 		<!-- <view :style="{display:showcommit?'flex':'none'}" class="mask" @tap.stop.prevent="showcommit=false">
-
 		</view> -->
 		<!-- 头像 -->
 		<image class="avatar" :lazy-load="true" :src="useravatar" mode="scaleToFill" @tap="handleGoUser" @error="imageError"></image>

@@ -80,6 +80,19 @@
 				this.value = "";
 			},
 			handlePlay(item) {
+				if (this.music.curr_music) {
+					console.log(item.id, this.music.curr_music.id, item.id === this.music.curr_music.id);
+					if (item.id === this.music.curr_music.id) {
+						uni.navigateTo({
+							url: `./music`,
+							success: e => {
+								this.asyncData(item.name.toString());
+								this.handleClear()
+							}
+						})
+						return;
+					}
+				}
 
 
 				this.request({
@@ -89,7 +102,7 @@
 					},
 					success: async res => {
 						let data = res.body.data[0];
-                     
+
 						uni.request({
 							url: `${api.GET_MUSIC_DETAIL}?ids=${data.id}`,
 							method: 'GET',

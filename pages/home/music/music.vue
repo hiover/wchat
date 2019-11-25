@@ -7,6 +7,9 @@
 		</view>
 
 		<view class="music roate" :style="{'animation-play-state':state==='pause'?'paused':'running'}" ref="music">
+			<view class="wave" :style="{'animation-play-state':state==='pause'?'paused':'running'}">
+
+			</view>
 			<!-- 播放圆盘 -->
 			<!-- <view :animation="animation" class="music" ref="music"> -->
 			<image @tap="handleTogglePlay" class="image" :src="music.image" mode="aspectFill">
@@ -59,7 +62,6 @@
 		},
 
 		methods: {
-
 			...mapMutations(['asyncMusic']),
 			play() {
 				innerAudioContext.play()
@@ -84,6 +86,8 @@
 				innerAudioContext.src = url;
 				innerAudioContext.coverImgUrl = this.music.image;
 				innerAudioContext.title = this.music.name;
+				const ar = this.music.artists.map(e => e.name).toString();
+				innerAudioContext.singer = ar;
 
 				innerAudioContext.onPlay(() => {
 					console.log('开始播放');
@@ -133,21 +137,23 @@
 
 	.header {
 		width: 100%;
-		height: 100upx;
 		position: absolute;
 		left: 0;
 		top: 0;
 		display: flex;
-		align-items: flex-end;
+		align-items: center;
 		justify-content: center;
 		padding-top: var(--status-bar-height);
+		height: 44px;
+		line-height: 44px;
+		font-size: 16px;
 
 		.back {
 			position: absolute;
 			left: 40rpx;
 			top: calc(var(--status-bar-height)+40upx);
 			color: #fff;
-			font-size: 50rpx;
+			font-size: 70rpx;
 		}
 
 		.name {
@@ -208,7 +214,24 @@
 
 	}
 
-	.music::before {
+	// .music::before {
+	// 	content: " ";
+	// 	border-radius: 50%;
+	// 	height: 630upx;
+	// 	width: 630upx;
+	// 	border: 30upx solid #fff;
+	// 	// background-color: #fff;
+	// 	position: absolute;
+	// 	left: 50%;
+	// 	top: 50%;
+	// 	z-index: 0;
+	// 	transform: translate(-50%, -50%);
+	// 	opacity: .5;
+	// 	animation: wave 3s infinite linear;
+	// 	-webkit-animation: wave 3s infinite linear;
+	// }
+
+	.wave {
 		content: " ";
 		border-radius: 50%;
 		height: 630upx;
@@ -265,6 +288,7 @@
 			height: 840upx;
 			width: 840upx;
 		}
+
 		100% {
 			opacity: 0.3;
 			height: 630upx;

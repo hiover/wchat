@@ -1,39 +1,40 @@
 <template>
-	<view class="app">
-		<view class="nav" :style="{opacity:opacity }">
-			<text class="icon back">&#xe6ed;</text>
-			<text class="title">温成说</text>
-		</view>
-		<view class="header">
-			<view class="img-box">
-				<image class="img" :lazy-load="true" :src="header_image" mode="scaleToFill" @tap="handleChangeCaver" />
+		<view class="app">
+			<view class="nav" :style="{opacity:opacity }">
+				<text class="icon back">&#xe6ed;</text>
+				<text class="title">温成说</text>
 			</view>
-			<text class="nickname">{{user.userInfo&&user.userInfo.nickName}}</text>
-			<image class="avatar" :lazy-load="true" :src="user.userInfo&&user.userInfo.avatarUrl" mode=""></image>
-			<text class="icon refrash" :style="[refrash_styles]">&#xe8b4;</text>
-		</view>
-		<view class="con">
-			<button v-if="!hasLogin" type="primary" open-type="getUserInfo" @getuserinfo="handleGetUserInfo">获取用户信息</button>
+			<view class="header">
+				<view class="img-box">
+					<image class="img" :lazy-load="true" :src="header_image" mode="scaleToFill" @tap="handleChangeCaver" />
+				</view>
+				<text class="nickname">{{user.userInfo&&user.userInfo.nickName}}</text>
+				<image class="avatar" :lazy-load="true" :src="user.userInfo&&user.userInfo.avatarUrl" mode=""></image>
+				<text class="icon refrash" :style="[refrash_styles]">&#xe8b4;</text>
+			</view>
+			<view class="con">
+				<button v-if="!hasLogin" type="primary" open-type="getUserInfo" @getuserinfo="handleGetUserInfo">获取用户信息</button>
 
-			<userContent v-for="(item,index) in monents" :key="index" :useravatar="item.useravatar" :nickname="item.nickname"
-			 :copywriting="item.copywriting" :signature="item.signature" :monents="item.monents" @on-commit="handleCommit" />
-			<view class="loadmore" v-if="showLoadMore">{{loadMoreText}}</view>
-		</view>
-		<!-- <input :style="{display:showcommit?'block':'none'}" class="input" confirm-type="发送"  placeholder=" " :focus="showcommit" placeholder="" @blur="showcommit=false" /> -->
-		<view class="commit" :style="{display:showcommit?'flex':'none'}">
-			<input :style="{display:showcommit?'block':'none'}" class="input" confirm-type="发送" :placeholder="` `" :focus="showcommit"
-			 placeholder="" @blur="showcommit=false" />
-			<text class="icon face">&#xe71c;</text>
+				<userContent v-for="(item,index) in monents" :key="index" :useravatar="item.useravatar" :nickname="item.nickname"
+				 :copywriting="item.copywriting" :signature="item.signature" :monents="item.monents" @on-commit="handleCommit" />
+				<view class="loadmore" v-if="showLoadMore">{{loadMoreText}}</view>
+			</view>
+			<!-- <input :style="{display:showcommit?'block':'none'}" class="input" confirm-type="发送"  placeholder=" " :focus="showcommit" placeholder="" @blur="showcommit=false" /> -->
+			<view class="commit" :style="{display:showcommit?'flex':'none'}">
+				<input :style="{display:showcommit?'block':'none'}" class="input" confirm-type="发送" :placeholder="` `" :focus="showcommit"
+				 placeholder="" @blur="showcommit=false" />
+				<text class="icon face">&#xe71c;</text>
+			</view>
+
 		</view>
 
-	</view>
 </template>
 
 <script>
 	import userContent from '@/pages/home/components/content.vue';
 	import api from '@/utils/interfaces.js';
 	import minix from '@/utils/minix';
-
+	// console.log(uni.getSystemInfoSync().statusBarHeight + 'px');
 	import {
 		mapState,
 		mapMutations
@@ -196,15 +197,12 @@
 			const term = e.scrollTop / 300;
 			if (term > 1) {
 				this.opacity = 1;
-
-
-
 			} else {
 				this.opacity = term
 			}
 			uni.setNavigationBarColor({
 				frontColor: this.opacity === 1 ? "#000000" : "#ffffff",
-				backgroundColor: this.opacity === 1 ? "#F8F8F8" : "#f8f8f8"
+				backgroundColor: this.opacity === 1 ? "#f8f8f8" : "#f8f8f8"
 			})
 
 			//震动一下
@@ -323,12 +321,14 @@
 		left: 0;
 		background: $header;
 		width: 100%;
-		height: 115upx;
+		// height: 115upx;
 		display: flex;
 		justify-content: center;
-		align-items: flex-end;
+		align-items: center;
 		z-index: 1;
-		font-size: 30upx;
+		height: 44px;
+		line-height: 44px;
+		font-size: 16px;
 
 		.back {
 			// font-size: 65upx;
@@ -371,13 +371,15 @@
 			width: 100%;
 			background-color: $mask;
 			position: relative;
-			.img{
+
+			.img {
 				position: absolute;
 				bottom: 0upx;
 				left: 0upx;
 				width: 100%;
-				
+
 			}
+
 			// position: absolute;
 			// bottom: -300upx;
 			// left: 0;
