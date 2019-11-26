@@ -16,7 +16,8 @@
 			<button v-if="!hasLogin" type="primary" open-type="getUserInfo" @getuserinfo="handleGetUserInfo">获取用户信息</button>
 
 			<userContent v-for="(item,index) in monents" :key="index" :useravatar="item.useravatar" :nickname="item.nickname"
-		:thumbs="item.thumbs" :discuss="item.discuss" 	:adder="item.adder" :time="item.time" :copywriting="item.copywriting" :signature="item.signature" :monents="item.monents" @on-commit="handleCommit" />
+			 :thumbs="item.thumbs" :discuss="item.discuss" :adder="item.adder" :time="item.time" :copywriting="item.copywriting"
+			 :signature="item.signature" :monents="item.monents" @on-commit="handleCommit" />
 			<view class="loadmore" v-if="showLoadMore">{{loadMoreText}}</view>
 		</view>
 		<!-- <input :style="{display:showcommit?'block':'none'}" class="input" confirm-type="发送"  placeholder=" " :focus="showcommit" placeholder="" @blur="showcommit=false" /> -->
@@ -67,7 +68,7 @@
 				monents: [{
 						useravatar: this.ganImage(),
 						nickname: "2016",
-						copywriting: "萌新登场，刚开始做过最傻的一件事情就是因为好奇直接问我们领导的工资水平？。",
+						copywriting: "萌新登场，刚开始做过最傻的一件事情就是因为好奇直接问我们领导的工资水平？",
 						signature: '越努力，越幸运。',
 						monents: {
 							type: 'text',
@@ -77,53 +78,53 @@
 							// 	copywriting: '美国通过香港人权法案！！！'
 							// }]
 						},
-						adder:'北京市.永安里通用国际中心',
-						time:'2016年10月01日',
-						thumbs:[{
-							name:'上单'
-						},{
-							name:'中单'
-						},{
-							name:'打野'
-						},{
-							name:'辅助'
-						},{
-							name:'ADC'
-						},{
-							name:'上单'
-						},{
-							name:'中单'
-						},{
-							name:'打野'
-						},{
-							name:'辅助'
-						},{
-							name:'ADC'
-						},{
-							name:'上单'
-						},{
-							name:'中单'
-						},{
-							name:'打野'
-						},{
-							name:'辅助'
-						},{
-							name:'ADC'
+						adder: '北京市.永安里通用国际中心',
+						time: '2016年10月01日',
+						thumbs: [{
+							name: '上单'
+						}, {
+							name: '中单'
+						}, {
+							name: '打野'
+						}, {
+							name: '辅助'
+						}, {
+							name: 'ADC'
+						}, {
+							name: '上单'
+						}, {
+							name: '中单'
+						}, {
+							name: '打野'
+						}, {
+							name: '辅助'
+						}, {
+							name: 'ADC'
+						}, {
+							name: '上单'
+						}, {
+							name: '中单'
+						}, {
+							name: '打野'
+						}, {
+							name: '辅助'
+						}, {
+							name: 'ADC'
 						}],
-						discuss:[{
-							from:'姐姐',
-							to:'',
-							con:'别感冒了'
-						},{
-							from:'TigerZH',
-							to:'姐姐',
-							con:'嗯嗯'
-						},{
-							from:'姐姐',
-							to:'TigerZH',
-							con:'nice'
+						discuss: [{
+							from: '姐姐',
+							to: '',
+							con: '别感冒了'
+						}, {
+							from: 'TigerZH',
+							to: '姐姐',
+							con: '嗯嗯'
+						}, {
+							from: '姐姐',
+							to: 'TigerZH',
+							con: 'nice'
 						}]
-						
+
 					},
 					// {
 					// 	useravatar: this.ganImage(),
@@ -137,7 +138,7 @@
 					// 		}]
 					// 	}
 					// },
-					
+
 
 
 				]
@@ -162,9 +163,9 @@
 			this.showLoadMore = false;
 			this.header_image = this.ganImage();
 			this.handleGetUserInfo();
-
-
+			this.asyncMonents()
 		},
+
 		onReachBottom() {
 			this.showLoadMore = true;
 			this.monents.push(...this.monents)
@@ -218,7 +219,20 @@
 		},
 		methods: {
 			...mapMutations(['login', 'asyncUserInfo']),
-
+			asyncMonents() {
+				this.request({
+					url: api.GET_MONENTS_DETAIL,
+					method: 'GET',
+					data: {},
+					success: res => {
+						console.log(res);
+						if (res.code === 200) {
+							this.monents = res.body;
+						}
+					},
+					
+				});
+			},
 			handleCommit() {
 				console.log('评论');
 				this.showcommit = true;

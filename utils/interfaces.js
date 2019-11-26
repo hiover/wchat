@@ -62,6 +62,7 @@ GET_MUSIC_DETAIL: `${host}song/detail`,
 // "33": 说唱TOP榜
 GET_TOP_LIST: `${host}top/list?idx=1`,
 GET_RECOMMEND_SONGS: `${host}recommend/songs`,
+GET_MONENTS_DETAIL: `${host}monents`,
 
 }
 

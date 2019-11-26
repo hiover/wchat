@@ -16,7 +16,7 @@
 				<text @tap="handleTogglePlay" v-if="state==='pause'" class="icon play">&#xe664;</text>
 			</image>
 		</view>
-		<button class="about" open-type="getUserInfo" @tap="handleGetUserInfo" @getuserinfo="handleGetUserInfo">关于我</button>
+		<button class="about" open-type="getUserInfo" @getuserinfo="handleGetUserInfo" @tap="handleGetUserInfo">关于我</button>
 	</view>
 </template>
 
@@ -185,12 +185,19 @@
 	}
 
 	.about {
+
 		position: fixed;
 		bottom: 50rpx;
 		right: 37rpx;
 		font-size: 24rpx;
-		border-radius: 40rpx;
+		border-radius: 50rpx;
+		font-weight: 350;
+		box-shadow: 10rpx 10rpx #333;
+		transition: all .3ms;
+	}
 
+	.about:active {
+		box-shadow: none;
 	}
 
 	.header {
@@ -206,6 +213,7 @@
 		line-height: 44px;
 		font-size: 16px;
 
+
 		.back {
 			position: absolute;
 			left: 40rpx;
@@ -216,7 +224,13 @@
 
 		.name {
 			color: #fff;
-			font-size: 40upx;
+			font-size: 40rpx;
+			width: 50%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+
 		}
 	}
 
