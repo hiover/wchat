@@ -38,12 +38,12 @@
 			</view>
 			<!-- 地址 -->
 			<view class="adder" @tap="handleGoMap">
-				江西.南昌
+				{{adder}}
 			</view>
 			<!-- 操作 -->
 			<view class="control">
 				<view class="time">
-					1分钟前
+					{{time}}
 				</view>
 				<!-- <view class="pop" :style="{display:showcommit?'flex':'none',width:'auto'}">
 
@@ -55,7 +55,7 @@
 					</view>
 				</view> -->
 
-				<view class="more" @tap="showcommit=true">
+				<view v-if="thumbs.length&&discuss.length" class="more" @tap="showcommit=true">
 
 					<view class="point">
 
@@ -70,15 +70,25 @@
 			</view>
 			<!-- 评论 -->
 			<view class="comment">
-				<view class="thumb">
-					<view class="person" @tap="handleGoUser">
-						<text class="icon">&#xe8ab;</text><text style="margin-left: 5px;">苏苏</text>
-
+				<!-- 点赞 -->
+				<view class="thumb" v-if="thumbs.length">
+					<view v-if="thumbs.length" class="person" @tap="handleGoUser">
+						<text class="icon" style="margin-right: 5px;font-weight: 500;">&#xe8ab;</text>
+						<text v-for="(thumb,index) in thumbs" :key="index">
+							<text v-show="index!==0" class="ma">,</text>
+							<text style="font-weight: 500;">{{thumb.name}}</text>
+						</text>
 					</view>
 				</view>
-				<view @tap="handleComitDiscuss" class="discuss">
-					<text class="name">苏苏</text>:
-					<text class="text"> 苏苏 🐶 凹</text>
+				<!-- 评论 -->
+				<view v-if="discuss.length" v-for="(dis,index) in discuss" :key="index" @tap="handleComitDiscuss" class="discuss">
+					<text class="name" style="font-weight: 500;">
+						<text>{{dis.from}}</text>
+						<text v-if="dis.to" class="to">@</text>
+						<text v-if="dis.to">{{dis.to}}</text>
+					</text>
+					<text style="margin-right: 5upx;">:</text>
+					<text class="text"> {{dis.con}}</text>
 				</view>
 			</view>
 		</view>
@@ -108,6 +118,24 @@
 			monents: {
 				type: Object,
 				default: {}
+			},
+			adder: {
+				type: String,
+				default: ''
+
+			},
+			time: {
+				type: String,
+				default: ''
+
+			},
+			thumbs: {
+				type: Array | Object,
+				default: [],
+			},
+			discuss: {
+				type: Array,
+				default: []
 			}
 
 		},
@@ -186,7 +214,7 @@
 	}
 
 	text {
-		font-size: 30upx;
+		font-size: 29upx;
 	}
 
 	.mask {
@@ -220,7 +248,7 @@
 			margin-left: 10upx;
 
 			.nickname {
-				font-size: 30upx;
+				font-size: 32upx;
 				font-weight: 900;
 				color: $name;
 
@@ -360,9 +388,15 @@
 					flex-wrap: wrap;
 					justify-content: flex-start;
 					align-items: center;
-					padding: 10upx 15upx;
+					padding: 5upx 15upx;
 					// border-bottom: 1upx solid #f4f4f4;
 					border-bottom: 1upx solid $commentline;
+					line-height: 35upx;
+
+					.ma {
+						color: $text;
+						margin-right: 5upx;
+					}
 
 					// font-weight: bold;
 
@@ -374,7 +408,8 @@
 					justify-content: flex-start;
 					align-items: center;
 					flex-wrap: wrap;
-					padding: 10upx 15upx;
+					padding: 5upx 15upx;
+					line-height: 35upx;
 
 					.name {
 						color: $name;
@@ -385,6 +420,11 @@
 
 					.name:active {
 						background: rgba($color: $name, $alpha:.1);
+					}
+
+					.to {
+						color: $text;
+						margin: 0 10upx;
 					}
 
 					.text {

@@ -12,7 +12,6 @@
 			</view>
 			<view class="artists text-over">
 				<text style="margin-right: 10px;" v-for="a in item.artists" :key="a.id">{{a.name}}</text>
-
 			</view>
 			<text class="icon play">&#xe664;</text>
 		</view>
@@ -25,6 +24,17 @@
 				<text v-if="music.his_list.length" class="his-item" v-for="(h,i) in music.his_list" :key="i" @tap="handleInput({target:{value:h}})">{{h}}</text>
 			</view>
 		</view>
+		<view v-if="!songs.length" class=" lie active" @tap="handlePlay(item)" v-for="(item,index) in toplist" :key="item.id">
+			<view class="name text-over">
+				{{index+1}}. {{item.name}}
+			</view>
+			<view class="artists text-over">
+				<text style="margin-right: 10px;" v-for="a in item.ar" :key="a.id">{{a.name}}</text>
+			</view>
+
+			<text class="icon play">&#xe664;</text>
+		</view>
+
 
 
 	</view>
@@ -45,12 +55,14 @@
 				currentTime: '00:00',
 				songs: [],
 				innerAudioContext: null,
+				toplist: [],
 
 			}
 		},
 		onLoad() {
 			// this.init()
-			this.asyncData(null)
+			this.asyncData(null);
+			this.asyncTopList();
 		},
 		computed: {
 			...mapState({
@@ -75,11 +87,28 @@
 				uni.setStorageSync(key, JSON.stringify(music))
 
 			},
+			asyncTopList() {
+				this.request({
+					url: api.GET_TOP_LIST,
+					method: 'GET',
+					data: {},
+					hideLoading: true,
+					success: res => {
+						if (res.body.code === 200) {
+							this.toplist = res.body.playlist.tracks.splice(0, 5);
+
+						}
+					}
+				});
+			},
 			handleClear() {
 				this.songs = [];
 				this.value = "";
 			},
 			handlePlay(item) {
+				if (item.ar) {
+					item.artists = item.ar
+				}
 				if (this.music.curr_music) {
 					console.log(item.id, this.music.curr_music.id, item.id === this.music.curr_music.id);
 					if (item.id === this.music.curr_music.id) {

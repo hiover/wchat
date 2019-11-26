@@ -1,8 +1,8 @@
 <template>
 	<view class="app">
 		<view class="nav" :style="{opacity:opacity,'padding-top':statusBarHeight }">
-			<text class="icon back">&#xe6ed;</text>
-			<text class="title">温成说</text>
+			<navigator open-type="navigateBack" class="back"><text class="icon">&#xe6ed;</text></navigator>
+			<text class="title">温城说</text>
 		</view>
 		<view class="header">
 			<view class="img-box">
@@ -16,7 +16,7 @@
 			<button v-if="!hasLogin" type="primary" open-type="getUserInfo" @getuserinfo="handleGetUserInfo">获取用户信息</button>
 
 			<userContent v-for="(item,index) in monents" :key="index" :useravatar="item.useravatar" :nickname="item.nickname"
-			 :copywriting="item.copywriting" :signature="item.signature" :monents="item.monents" @on-commit="handleCommit" />
+		:thumbs="item.thumbs" :discuss="item.discuss" 	:adder="item.adder" :time="item.time" :copywriting="item.copywriting" :signature="item.signature" :monents="item.monents" @on-commit="handleCommit" />
 			<view class="loadmore" v-if="showLoadMore">{{loadMoreText}}</view>
 		</view>
 		<!-- <input :style="{display:showcommit?'block':'none'}" class="input" confirm-type="发送"  placeholder=" " :focus="showcommit" placeholder="" @blur="showcommit=false" /> -->
@@ -66,17 +66,64 @@
 				appear: false,
 				monents: [{
 						useravatar: this.ganImage(),
-						nickname: "王力宏",
-						copywriting: "FPX牛批！！！！",
-						signature: '无提',
+						nickname: "2016",
+						copywriting: "萌新登场，刚开始做过最傻的一件事情就是因为好奇直接问我们领导的工资水平？。",
+						signature: '越努力，越幸运。',
 						monents: {
-							type: 'share',
-							list: [{
-								id: '',
-								url: this.ganImage(),
-								copywriting: '美国通过香港人权法案！！！'
-							}]
-						}
+							type: 'text',
+							// list: [{
+							// 	id: '',
+							// 	url: this.ganImage(),
+							// 	copywriting: '美国通过香港人权法案！！！'
+							// }]
+						},
+						adder:'北京市.永安里通用国际中心',
+						time:'2016年10月01日',
+						thumbs:[{
+							name:'上单'
+						},{
+							name:'中单'
+						},{
+							name:'打野'
+						},{
+							name:'辅助'
+						},{
+							name:'ADC'
+						},{
+							name:'上单'
+						},{
+							name:'中单'
+						},{
+							name:'打野'
+						},{
+							name:'辅助'
+						},{
+							name:'ADC'
+						},{
+							name:'上单'
+						},{
+							name:'中单'
+						},{
+							name:'打野'
+						},{
+							name:'辅助'
+						},{
+							name:'ADC'
+						}],
+						discuss:[{
+							from:'姐姐',
+							to:'',
+							con:'别感冒了'
+						},{
+							from:'TigerZH',
+							to:'姐姐',
+							con:'嗯嗯'
+						},{
+							from:'姐姐',
+							to:'TigerZH',
+							con:'nice'
+						}]
+						
 					},
 					// {
 					// 	useravatar: this.ganImage(),
@@ -90,76 +137,7 @@
 					// 		}]
 					// 	}
 					// },
-					{
-						useravatar: this.ganImage(),
-						nickname: "周杰伦",
-						copywriting: "我没胖！！！",
-						signature: '也许我不是你的小可爱',
-						monents: {
-							type: 'image',
-							list: [{
-								id: 'pub_300',
-								url: this.ganImage()
-							}, {
-								id: 'pub_301',
-								url: this.ganImage()
-							}, {
-								id: 'pub_302',
-								url: this.ganImage()
-							}, {
-								id: 'pub_303',
-								url: this.ganImage()
-							}, {
-								id: 'pub_304',
-								url: this.ganImage()
-							}, {
-								id: 'pub_305',
-								url: this.ganImage()
-							}, {
-								id: 'pub_306',
-								url: this.ganImage()
-							}, {
-								id: 'pub_307',
-								url: this.ganImage()
-							}, {
-								id: 'pub_308',
-								url: this.ganImage()
-							}, ]
-						}
-					}, {
-						useravatar: this.ganImage(),
-						nickname: "王一迪",
-						copywriting: "快吃不起水果了🍊🍎🍞🥛",
-						signature: '原谅我不完美',
-						monents: {
-							type: 'image',
-							list: [{
-								id: 'pub_124',
-								url: this.ganImage()
-							}]
-						}
-					}, {
-						useravatar: this.ganImage(),
-						nickname: "姜丽起",
-						signature: '？',
-						copywriting: "王者dd",
-						monents: {
-							type: 'image',
-							list: [{
-								id: 'pub_125',
-								url: this.ganImage()
-							}, {
-								id: 'pub_126',
-								url: this.ganImage()
-							}, {
-								id: 'pub_127',
-								url: this.ganImage()
-							}, {
-								id: 'pub_128',
-								url: this.ganImage()
-							}]
-						}
-					},
+					
 
 
 				]

@@ -6,8 +6,8 @@
 			<text class="name">{{music.name}}</text>
 		</view>
 
-		<view class="music roate" :style="{'animation-play-state':state==='pause'?'paused':'running'}" ref="music">
-			<view class="wave" :style="{'animation-play-state':state==='pause'?'paused':'running'}">
+		<view class="music roate" :style="{'animation-play-state':state==='playing'?'running':'paused'}" ref="music">
+			<view class="wave" :style="{'animation-play-state':state==='playing'?'running':'paused'}">
 
 			</view>
 			<!-- 播放圆盘 -->
@@ -16,6 +16,7 @@
 				<text @tap="handleTogglePlay" v-if="state==='pause'" class="icon play">&#xe664;</text>
 			</image>
 		</view>
+		<button class="about" open-type="getUserInfo" @tap="handleGetUserInfo" @getuserinfo="handleGetUserInfo">关于我</button>
 	</view>
 </template>
 
@@ -31,6 +32,7 @@
 		data() {
 			return {
 				state: '',
+
 			}
 		},
 		onLoad() {
@@ -46,7 +48,7 @@
 				backgroundColor: "#f8f8f8"
 			})
 			// debugger;
-			console.log(this.music);
+			// console.log(this.music);
 			// console.log(JSON.parse(params));
 			// this.init()
 			this.setOptions()
@@ -59,12 +61,48 @@
 			...mapState({
 				music: state => state.music.curr_music,
 				statusBarHeight: state => state.statusBarHeight,
+				user: state => state.statusBarHeight,
+				haslogin: state => state.hasLogin,
+
 
 			})
 		},
 
 		methods: {
-			...mapMutations(['asyncMusic']),
+			...mapMutations(['login', 'asyncMusic', 'asyncUserInfo']),
+			handleGoHome() {
+				uni.redirectTo({
+					url: '../home',
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			handleGetUserInfo() {
+				if (this.haslogin) {
+					this.handleGoHome();
+					return
+				}
+				uni.login({
+					provider: 'weixin',
+					success: (loginRes) => {
+						console.log(loginRes);
+						this.login("weixin");
+						// 获取用户信息
+						uni.getUserInfo({
+							provider: 'weixin',
+							success: (infoRes) => {
+								this.asyncUserInfo(infoRes);
+								this.handleGoHome();
+
+							},
+							complete(infoRes) {
+								console.log(infoRes);
+							}
+						});
+					}
+				});
+			},
 			play() {
 				innerAudioContext.play()
 			},
@@ -146,6 +184,15 @@
 
 	}
 
+	.about {
+		position: fixed;
+		bottom: 50rpx;
+		right: 37rpx;
+		font-size: 24rpx;
+		border-radius: 40rpx;
+
+	}
+
 	.header {
 		width: 100%;
 		position: absolute;
@@ -220,9 +267,6 @@
 		z-index: 0;
 		transform: translate(-50%, -50%);
 		opacity: .48;
-
-
-
 	}
 
 	// .music::before {

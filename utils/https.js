@@ -6,7 +6,7 @@ module.exports = (param) => {
 	
 	// 请求方式: GET POST 
 	if(method){
-		method = method.toUpperCase(); // 小写转成大写
+		method = method.toUpperCase(); // 小写转城大写
 		if(method == "POST"){
 			header = {"content-type":"application/x-www-form-urlencoded"}
 		}
@@ -39,7 +39,7 @@ module.exports = (param) => {
 			})
 			typeof param.fail == "function" && param.fail(e.data);
 		},
-		complete: () => {
+		complete: (e) => {
 			// console.log("网络请求complete");
 			uni.hideLoading();
 			typeof param.complete == "function" && param.complete(e.data);
