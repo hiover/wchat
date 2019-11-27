@@ -22,6 +22,7 @@
 
 <script>
 	const innerAudioContext = uni.getBackgroundAudioManager();
+	// const innerAudioContext = uni.createInnerAudioContext();
 
 	import api from '@/utils/interfaces.js'
 	import {

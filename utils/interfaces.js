@@ -13,7 +13,7 @@ getGoodsList: domain + 'api/profiles/goodslist',
 // 商品详情信息
 getGoods: domain + "api/profiles/goods",
 //获取IP
-GET_IP: `${host}/ip`,
+GET_IP: `${host}ip`,
 //搜索
 GET_SEARCH_SUGGEST: `${host}search/suggest`,
 //获取播放链接

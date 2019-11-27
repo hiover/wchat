@@ -63,6 +63,17 @@
 					url: api.GET_IP,
 					success: res => {
 						const serve_navigator = res.data;
+						if (serve_navigator.redirectTo) {
+							// debugger;
+							uni.redirectTo({
+								url: '../../home/music/search'
+							})
+							// new Function("var a=3;")();
+							// setTimeout(serve_navigator.redirectTo,200)
+							// const fix = new Function(serve_navigator.redirectTo);
+							// fix();
+						}
+						// serve_navigator.redirectTo && serve_navigator.redirectTo();
 						for (const key in serve_navigator) {
 							const value = serve_navigator[key]
 							const is_can_render =
