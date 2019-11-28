@@ -44,10 +44,10 @@
 			uni.setNavigationBarTitle({
 				title: this.music.name
 			});
-			uni.setNavigationBarColor({
-				frontColor: "#ff8344",
-				backgroundColor: "#f8f8f8"
-			})
+			// uni.setNavigationBarColor({
+			// 	frontColor: "#ff8344",
+			// 	backgroundColor: "#f8f8f8"
+			// })
 			// debugger;
 			// console.log(this.music);
 			// console.log(JSON.parse(params));
@@ -80,6 +80,10 @@
 				});
 			},
 			handleGetUserInfo() {
+				// #ifdef APP-PLUS
+				this.handleGoHome();
+				// #endif
+				// #ifdef MP-WEIXIN
 				if (this.haslogin) {
 					this.handleGoHome();
 					return
@@ -103,6 +107,11 @@
 						});
 					}
 				});
+
+				// #endif
+
+
+
 			},
 			play() {
 				innerAudioContext.play()
@@ -111,7 +120,7 @@
 				innerAudioContext.pause()
 			},
 			handleTogglePlay() {
-				if (innerAudioContext.paused) {
+				if (this.state !== 'playing') {
 					this.play()
 					this.state = 'playing';
 				} else {

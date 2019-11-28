@@ -1,16 +1,6 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/tabBar/home/home",
-			"style": {
-				"navigationBarTitleText": "温城说API",
 
-				"app-plus": { // 取消默认的状态来
-					"titleNView": false,
-					"bounce": "none"
-				}
-			}
-		},
 		{
 			"path": "pages/home/music/search",
 			"style": {}
@@ -27,8 +17,17 @@
 				"mp-weixin": {}
 			}
 		},
+		{
+			"path": "pages/tabBar/home/home",
+			"style": {
+				"navigationBarTitleText": "温城说API",
 
-
+				"app-plus": { // 取消默认的状态来
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
 		{
 			"path": "pages/home/music/music",
 			"style": {
