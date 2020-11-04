@@ -20,7 +20,7 @@
 		{
 			"path": "pages/tabBar/home/home",
 			"style": {
-				"navigationBarTitleText": "温城说API",
+				"navigationBarTitleText": "z songAPI",
 
 				"app-plus": { // 取消默认的状态来
 					"titleNView": false,
@@ -73,7 +73,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "温城说",
+		"navigationBarTitleText": "z song",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FFFFFF",
 		"mp-weixin": {
